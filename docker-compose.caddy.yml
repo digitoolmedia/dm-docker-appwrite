@@ -41,8 +41,8 @@ services:
     networks:
       - appwrite
     depends_on:
-      - mariadb
-      - redis
+      - appwrite-mariadb
+      - appwrite-redis
     labels:
       - traefik.enable=true
       - traefik.constraint-label-stack=appwrite
@@ -178,8 +178,8 @@ services:
     networks:
       - appwrite
     depends_on:
-      - mariadb
-      - redis
+      - appwrite-mariadb
+      - appwrite-redis
     environment:
       - _APP_ENV
       - _APP_WORKER_PER_CORE
@@ -210,8 +210,8 @@ services:
     networks:
       - appwrite
     depends_on:
-      - mariadb
-      - redis
+      - appwrite-mariadb
+      - appwrite-redis
     environment:
       - _APP_ENV
       - _APP_WORKER_PER_CORE
@@ -239,8 +239,8 @@ services:
     networks:
       - appwrite
     depends_on:
-      - mariadb
-      - redis
+      - appwrite-mariadb
+      - appwrite-redis
     environment:
       - _APP_ENV
       - _APP_WORKER_PER_CORE
@@ -264,8 +264,8 @@ services:
     networks:
       - appwrite
     depends_on:
-      - mariadb
-      - redis
+      - appwrite-mariadb
+      - appwrite-redis
     volumes:
       - appwrite-uploads:/storage/uploads:rw
       - appwrite-cache:/storage/cache:rw
@@ -322,8 +322,8 @@ services:
     networks:
       - appwrite
     depends_on:
-      - mariadb
-      - redis
+      - appwrite-mariadb
+      - appwrite-redis
     environment:
       - _APP_ENV
       - _APP_WORKER_PER_CORE
@@ -351,8 +351,8 @@ services:
     networks:
       - appwrite
     depends_on:
-      - mariadb
-      - redis
+      - appwrite-mariadb
+      - appwrite-redis
     volumes:
       - appwrite-functions:/storage/functions:rw
       - appwrite-builds:/storage/builds:rw
@@ -417,8 +417,8 @@ services:
     networks:
       - appwrite
     depends_on:
-      - mariadb
-      - redis
+      - appwrite-mariadb
+      - appwrite-redis
     volumes:
       - appwrite-config:/storage/config:rw
       - appwrite-certificates:/storage/certificates:rw
@@ -456,8 +456,8 @@ services:
     networks:
       - appwrite
     depends_on:
-      - mariadb
-      - redis
+      - appwrite-mariadb
+      - appwrite-redis
       - openruntimes-executor
     environment:
       - _APP_ENV
@@ -495,7 +495,7 @@ services:
     networks:
       - appwrite
     depends_on:
-      - redis
+      - appwrite-redis
     environment:
       - _APP_ENV
       - _APP_WORKER_PER_CORE
@@ -522,7 +522,7 @@ services:
     networks:
       - appwrite
     depends_on:
-      - redis
+      - appwrite-redis
     environment:
       - _APP_ENV
       - _APP_WORKER_PER_CORE
@@ -549,7 +549,7 @@ services:
     networks:
       - appwrite
     depends_on:
-      - mariadb
+      - appwrite-mariadb
     environment:
       - _APP_ENV
       - _APP_WORKER_PER_CORE
@@ -582,7 +582,7 @@ services:
     networks:
       - appwrite
     depends_on:
-      - redis
+      - appwrite-redis
     environment:
       - _APP_ENV
       - _APP_WORKER_PER_CORE
@@ -619,8 +619,8 @@ services:
     networks:
       - appwrite
     depends_on:
-      - mariadb
-      - redis
+      - appwrite-mariadb
+      - appwrite-redis
     environment:
       - _APP_ENV
       - _APP_WORKER_PER_CORE
@@ -646,8 +646,8 @@ services:
     networks:
       - appwrite
     depends_on:
-      - mariadb
-      - redis
+      - appwrite-mariadb
+      - appwrite-redis
     environment:
       - _APP_ENV
       - _APP_WORKER_PER_CORE
@@ -680,8 +680,8 @@ services:
     networks:
       - appwrite
     depends_on:
-      - mariadb
-      - redis
+      - appwrite-mariadb
+      - appwrite-redis
     environment:
       - _APP_ENV
       - _APP_WORKER_PER_CORE
@@ -711,8 +711,8 @@ services:
     networks:
       - appwrite
     depends_on:
-      - mariadb
-      - redis
+      - appwrite-mariadb
+      - appwrite-redis
     environment:
       - _APP_ENV
       - _APP_WORKER_PER_CORE
