@@ -26,10 +26,11 @@ services:
       restart_policy:
         condition: on-failure
       labels:
-        caddy_1: ${APPWRITE_TRAEFIK_DOMAIN}
-        caddy_1.reverse_proxy: "{{upstreams 443}}"
-        caddy_1.reverse_proxy.header_up: "Host {upstream_hostport}"
-        caddy_1.reverse_proxy.transport.http: "tls_insecure_skip_verify"
+        caddy: ${APPWRITE_TRAEFIK_DOMAIN}
+        caddy.reverse_proxy: "{{upstreams https 443}}"
+        caddy.reverse_proxy.header_up: "Host {upstream_hostport}"
+        caddy.reverse_proxy.transport: "http"
+        caddy.reverse_proxy.transport.tls_insecure_skip_verify:
 
   appwrite:
     image: appwrite/appwrite:1.5.3
