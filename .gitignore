@@ -35,3 +35,5 @@ logs
 .idea
 
 # Project specific
+docker-compose.*.yml
+!docker-compose.caddy.yml
