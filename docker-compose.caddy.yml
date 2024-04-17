@@ -752,6 +752,8 @@ services:
       - MYSQL_PASSWORD=${_APP_DB_PASS}
     command: 'mysqld --innodb-flush-method=fsync'
     deploy:
+      mode: replicated
+      replicas: 1
       placement:
         constraints:
           - ${NODE_PLACEMENT}
@@ -769,6 +771,12 @@ services:
       - appwrite
     volumes:
       - appwrite-redis:/data:rw
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - ${NODE_PLACEMENT}
 
 networks:
   gateway:
