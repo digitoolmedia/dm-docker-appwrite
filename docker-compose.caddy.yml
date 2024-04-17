@@ -1,17 +1,9 @@
 version: '3.8'
 
-x-logging: &x-logging
-  logging:
-    driver: 'json-file'
-    options:
-      max-file: '5'
-      max-size: '10m'
-
 services:
   traefik:
     image: traefik:2.11
     container_name: appwrite-traefik
-    <<: *x-logging
     command:
       - --providers.file.directory=/storage/config
       - --providers.file.watch=true
@@ -42,7 +34,6 @@ services:
   appwrite:
     image: appwrite/appwrite:1.5.3
     container_name: appwrite
-    <<: *x-logging
     deploy:
       mode: global
       restart_policy:
@@ -435,7 +426,7 @@ services:
       replicas: 1
       placement:
         constraints:
-          - "node.hostname==manager-1"
+          - ${NODE_PLACEMENT}
       restart_policy:
         condition: on-failure
     networks:
@@ -498,7 +489,6 @@ services:
   appwrite-worker-messaging:
     image: appwrite/appwrite:1.5.3
     entrypoint: worker-messaging
-    <<: *x-logging
     container_name: appwrite-worker-messaging
     restart: unless-stopped
     networks:
@@ -524,7 +514,6 @@ services:
   appwrite-worker-migrations:
     image: appwrite/appwrite:1.5.3
     entrypoint: worker-migrations
-    <<: *x-logging
     container_name: appwrite-worker-migrations
     restart: unless-stopped
     networks:
@@ -587,7 +576,6 @@ services:
   appwrite-worker-usage:
     image: appwrite/appwrite:1.5.3
     container_name: appwrite-worker-usage
-    <<: *x-logging
     entrypoint: usage
     deploy:
       mode: replicated
@@ -617,7 +605,6 @@ services:
   appwrite-worker-usage-dump:
     image: appwrite/appwrite:1.5.3
     entrypoint: worker-usage-dump
-    <<: *x-logging
     container_name: appwrite-worker-usage-dump
     networks:
       - appwrite
@@ -642,7 +629,6 @@ services:
   appwrite-scheduler-functions:
     image: appwrite/appwrite:1.5.3
     container_name: appwrite-scheduler-functions
-    <<: *x-logging
     entrypoint: schedule-functions
     deploy:
       mode: replicated
@@ -671,7 +657,6 @@ services:
     image: appwrite/appwrite:1.5.3
     entrypoint: schedule-messages
     container_name: appwrite-scheduler-messages
-    <<: *x-logging
     deploy:
       mode: replicated
       replicas: 1
@@ -699,7 +684,6 @@ services:
   appwrite-assistant:
     image: appwrite/assistant:0.4.0
     container_name: appwrite-assistant
-    <<: *x-logging
     restart: unless-stopped
     networks:
       - appwrite
@@ -709,7 +693,6 @@ services:
   openruntimes-executor:
     container_name: openruntimes-executor
     hostname: appwrite-executor
-    <<: *x-logging
     restart: unless-stopped
     stop_signal: SIGINT
     image: openruntimes/executor:0.4.9
