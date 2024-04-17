@@ -27,7 +27,9 @@ services:
       labels:
         caddy: ${APPWRITE_TRAEFIK_DOMAIN}
         caddy.reverse_proxy: "{{upstreams https 443}}"
-        caddy.reverse_proxy.header_up: "Host {upstream_hostport}"
+        caddy.reverse_proxy.1_header_up: "X-Forwarded-Proto {scheme}"
+        caddy.reverse_proxy.2_header_up: "X-Forwarded-Host {host}"
+        caddy.reverse_proxy.header_up: "Host {host}"
         caddy.reverse_proxy.transport: "http"
         caddy.reverse_proxy.transport.tls_insecure_skip_verify:
 
