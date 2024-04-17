@@ -748,41 +748,12 @@ networks:
     driver: overlay
     attachable: true
 
-
 volumes:
+  appwrite-mariadb:
+  appwrite-redis:
   appwrite-cache:
-    driver: local
-    driver_opts:
-      type: volume
-      o: "bind"
-      device: "/home/share/cache"
   appwrite-uploads:
-    driver: local
-    driver_opts:
-      type: volume
-      o: "bind"
-      device: "/home/share/uploads"
   appwrite-certificates:
-    driver: local
-    driver_opts:
-      type: volume
-      o: "bind"
-      device: "/home/share/certificates"
   appwrite-functions:
-    driver: local
-    driver_opts:
-      type: volume
-      o: "bind"
-      device: "/home/share/functions"
   appwrite-builds:
-    driver: local
-    driver_opts:
-      type: volume
-      o: "bind"
-      device: "/home/share/builds"
   appwrite-config:
-    driver: local
-    driver_opts:
-      type: volume
-      o: "bind"
-      device: "/home/share/config"
