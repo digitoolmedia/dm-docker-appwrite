@@ -823,6 +823,8 @@ services:
           - ${NODE_PLACEMENT}
 
 networks:
+  caddy-public:
+    external: true
   gateway:
     driver: overlay
     attachable: true
