@@ -3,6 +3,8 @@ version: '3.8'
 services:
   traefik:
     image: traefik:2.11
+    tty: true
+    stdin_open: true
     command:
       - --providers.file.directory=/storage/config
       - --providers.file.watch=true
@@ -35,6 +37,8 @@ services:
 
   appwrite:
     image: appwrite/appwrite:1.5.3
+    tty: true
+    stdin_open: true
     deploy:
       mode: global
       restart_policy:
