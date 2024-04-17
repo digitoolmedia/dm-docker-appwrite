@@ -9,7 +9,6 @@ services:
       - --providers.file.watch=true
       - --providers.docker=true
       - --providers.docker.exposedByDefault=false
-      - --providers.docker.constraints=Label(`traefik.constraint-label-stack`,`appwrite`)
       - --entrypoints.appwrite_web.address=:80
       - --entrypoints.appwrite_websecure.address=:443
     volumes:
@@ -19,6 +18,7 @@ services:
     depends_on:
       - appwrite
     networks:
+      - caddy-public
       - gateway
       - appwrite
     deploy:
@@ -45,7 +45,6 @@ services:
       - appwrite-redis
     labels:
       - traefik.enable=true
-      - traefik.constraint-label-stack=appwrite
       - traefik.docker.network=appwrite
       - traefik.http.services.appwrite_api.loadbalancer.server.port=80
       - traefik.http.routers.appwrite_api_http.entrypoints=appwrite_web
@@ -164,7 +163,6 @@ services:
         condition: on-failure
     labels:
       - "traefik.enable=true"
-      - "traefik.constraint-label-stack=appwrite"
       - "traefik.docker.network=appwrite"
       - "traefik.http.services.appwrite_realtime.loadbalancer.server.port=80"
       - traefik.http.routers.appwrite_realtime_ws.entrypoints=appwrite_web
