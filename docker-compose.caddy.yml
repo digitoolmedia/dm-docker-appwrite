@@ -3,7 +3,6 @@ version: '3.8'
 services:
   traefik:
     image: traefik:2.11
-    container_name: appwrite-traefik
     command:
       - --providers.file.directory=/storage/config
       - --providers.file.watch=true
@@ -34,7 +33,6 @@ services:
 
   appwrite:
     image: appwrite/appwrite:1.5.3
-    container_name: appwrite
     deploy:
       mode: global
       restart_policy:
@@ -516,8 +514,6 @@ services:
   appwrite-worker-messaging:
     image: appwrite/appwrite:1.5.3
     entrypoint: worker-messaging
-    container_name: appwrite-worker-messaging
-    restart: unless-stopped
     networks:
       - appwrite
     depends_on:
@@ -543,8 +539,6 @@ services:
   appwrite-worker-migrations:
     image: appwrite/appwrite:1.5.3
     entrypoint: worker-migrations
-    container_name: appwrite-worker-migrations
-    restart: unless-stopped
     networks:
       - appwrite
     depends_on:
@@ -608,7 +602,6 @@ services:
 
   appwrite-worker-usage:
     image: appwrite/appwrite:1.5.3
-    container_name: appwrite-worker-usage
     entrypoint: usage
     deploy:
       mode: replicated
@@ -641,7 +634,6 @@ services:
   appwrite-worker-usage-dump:
     image: appwrite/appwrite:1.5.3
     entrypoint: worker-usage-dump
-    container_name: appwrite-worker-usage-dump
     networks:
       - appwrite
     depends_on:
@@ -667,7 +659,6 @@ services:
 
   appwrite-scheduler-functions:
     image: appwrite/appwrite:1.5.3
-    container_name: appwrite-scheduler-functions
     entrypoint: schedule-functions
     deploy:
       mode: replicated
@@ -698,7 +689,6 @@ services:
   appwrite-scheduler-messages:
     image: appwrite/appwrite:1.5.3
     entrypoint: schedule-messages
-    container_name: appwrite-scheduler-messages
     deploy:
       mode: replicated
       replicas: 1
@@ -706,7 +696,6 @@ services:
         max_replicas_per_node: 1
       restart_policy:
         condition: on-failure
-    restart: unless-stopped
     networks:
       - appwrite
     depends_on:
@@ -728,17 +717,13 @@ services:
 
   appwrite-assistant:
     image: appwrite/assistant:0.4.0
-    container_name: appwrite-assistant
-    restart: unless-stopped
     networks:
       - appwrite
     environment:
       - _APP_ASSISTANT_OPENAI_API_KEY
 
   openruntimes-executor:
-    container_name: openruntimes-executor
     hostname: appwrite-executor
-    restart: unless-stopped
     stop_signal: SIGINT
     image: openruntimes/executor:0.4.9
     networks:
@@ -784,8 +769,6 @@ services:
 
   mariadb:
     image: mariadb:10.11 # fix issues when upgrading using: mysql_upgrade -u root -p
-    container_name: appwrite-mariadb
-    restart: unless-stopped
     networks:
       - appwrite
     volumes:
@@ -805,8 +788,6 @@ services:
 
   redis:
     image: redis:7.2.4-alpine
-    container_name: appwrite-redis
-    restart: unless-stopped
     command: >
       redis-server
       --maxmemory            512mb
