@@ -740,7 +740,6 @@ services:
   mariadb:
     image: mariadb:10.11 # fix issues when upgrading using: mysql_upgrade -u root -p
     container_name: appwrite-mariadb
-    <<: *x-logging
     restart: unless-stopped
     networks:
       - appwrite
@@ -760,7 +759,6 @@ services:
   redis:
     image: redis:7.2.4-alpine
     container_name: appwrite-redis
-    <<: *x-logging
     restart: unless-stopped
     command: >
       redis-server
