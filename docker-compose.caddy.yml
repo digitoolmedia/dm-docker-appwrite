@@ -40,6 +40,9 @@ services:
         condition: on-failure
     networks:
       - appwrite
+    depends_on:
+      - mariadb
+      - redis
     labels:
       - traefik.enable=true
       - traefik.constraint-label-stack=appwrite
@@ -174,6 +177,9 @@ services:
       - traefik.http.routers.appwrite_realtime_wss.tls.certresolver=dns
     networks:
       - appwrite
+    depends_on:
+      - mariadb
+      - redis
     environment:
       - _APP_ENV
       - _APP_WORKER_PER_CORE
@@ -203,6 +209,9 @@ services:
         condition: on-failure
     networks:
       - appwrite
+    depends_on:
+      - mariadb
+      - redis
     environment:
       - _APP_ENV
       - _APP_WORKER_PER_CORE
@@ -229,6 +238,9 @@ services:
         condition: on-failure
     networks:
       - appwrite
+    depends_on:
+      - mariadb
+      - redis
     environment:
       - _APP_ENV
       - _APP_WORKER_PER_CORE
@@ -251,6 +263,9 @@ services:
         condition: on-failure
     networks:
       - appwrite
+    depends_on:
+      - mariadb
+      - redis
     volumes:
       - appwrite-uploads:/storage/uploads:rw
       - appwrite-cache:/storage/cache:rw
@@ -306,6 +321,9 @@ services:
         condition: on-failure
     networks:
       - appwrite
+    depends_on:
+      - mariadb
+      - redis
     environment:
       - _APP_ENV
       - _APP_WORKER_PER_CORE
@@ -332,6 +350,9 @@ services:
         condition: on-failure
     networks:
       - appwrite
+    depends_on:
+      - mariadb
+      - redis
     volumes:
       - appwrite-functions:/storage/functions:rw
       - appwrite-builds:/storage/builds:rw
@@ -395,6 +416,9 @@ services:
         condition: on-failure
     networks:
       - appwrite
+    depends_on:
+      - mariadb
+      - redis
     volumes:
       - appwrite-config:/storage/config:rw
       - appwrite-certificates:/storage/certificates:rw
@@ -432,6 +456,8 @@ services:
     networks:
       - appwrite
     depends_on:
+      - mariadb
+      - redis
       - openruntimes-executor
     environment:
       - _APP_ENV
@@ -468,6 +494,8 @@ services:
         condition: on-failure
     networks:
       - appwrite
+    depends_on:
+      - redis
     environment:
       - _APP_ENV
       - _APP_WORKER_PER_CORE
@@ -493,6 +521,8 @@ services:
     restart: unless-stopped
     networks:
       - appwrite
+    depends_on:
+      - redis
     environment:
       - _APP_ENV
       - _APP_WORKER_PER_CORE
@@ -518,6 +548,8 @@ services:
     restart: unless-stopped
     networks:
       - appwrite
+    depends_on:
+      - mariadb
     environment:
       - _APP_ENV
       - _APP_WORKER_PER_CORE
@@ -549,6 +581,8 @@ services:
         condition: on-failure
     networks:
       - appwrite
+    depends_on:
+      - redis
     environment:
       - _APP_ENV
       - _APP_WORKER_PER_CORE
@@ -584,6 +618,9 @@ services:
         condition: on-failure
     networks:
       - appwrite
+    depends_on:
+      - mariadb
+      - redis
     environment:
       - _APP_ENV
       - _APP_WORKER_PER_CORE
@@ -608,6 +645,9 @@ services:
     container_name: appwrite-worker-usage-dump
     networks:
       - appwrite
+    depends_on:
+      - mariadb
+      - redis
     environment:
       - _APP_ENV
       - _APP_WORKER_PER_CORE
@@ -639,6 +679,9 @@ services:
         condition: on-failure
     networks:
       - appwrite
+    depends_on:
+      - mariadb
+      - redis
     environment:
       - _APP_ENV
       - _APP_WORKER_PER_CORE
@@ -667,6 +710,9 @@ services:
     restart: unless-stopped
     networks:
       - appwrite
+    depends_on:
+      - mariadb
+      - redis
     environment:
       - _APP_ENV
       - _APP_WORKER_PER_CORE
