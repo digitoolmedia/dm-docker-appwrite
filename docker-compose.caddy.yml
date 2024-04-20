@@ -20,7 +20,7 @@ services:
         caddy.handle: "/v1/realtime/*"
         caddy.handle.@ws.0_header: Connection *Upgrade*
         caddy.handle.@ws.1_header: Upgrade websocket
-        caddy.handle.reverse_proxy: "@ws appwrite-realtime"
+        caddy.handle.reverse_proxy: "@ws appwrite-realtime:80"
         caddy.log.output: stderr
         caddy.log.level: DEBUG
         caddy.log.format: console
